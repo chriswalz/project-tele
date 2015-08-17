@@ -291,7 +291,7 @@ public class PlayerManager : MonoBehaviour
         //Apply new rotation and position
 		this.transform.eulerAngles = newRotation;
 		if (playerStatus == PlayerStatus.Sinking) {
-			this.transform.position = playerCoords;
+			this.transform.Translate(Vector2.down * -speed * Time.deltaTime);
 		} else {
 			this.transform.position = playerCoords;
 		}
