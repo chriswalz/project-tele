@@ -8,9 +8,10 @@ public class MovingLayer : MonoBehaviour
 
     public float startingSpeed;                 //The starting speed of the layer
 
-    public float startAt;                       //The spawned layer elements starts on this X coordinate
+	public float startAtX;
+    public float startAtY;                       //The spawned layer elements starts on this X coordinate
     public float spawningRate;                  //Spawn a new layer element at this rate
-    public float resetAt;                       //Reset a layer element, when it reaches this global X coordinates
+    public float resetAtY;                       //Reset a layer element, when it reaches this global X coordinates
 
     public float delayBeforeFirst;              //How much delay should be applied before the spawn of the first element
 
@@ -31,6 +32,13 @@ public class MovingLayer : MonoBehaviour
         speedMultiplier = 1;
         paused = true;
 
+		if (startAtX == 0) {
+			startAtX = -5;
+		}
+		if (startAtY == 0) {
+			startAtY = -5;
+		}
+
         activeElements = new List<Transform>();
         inactive = new List<Transform>();
 
@@ -48,11 +56,11 @@ public class MovingLayer : MonoBehaviour
             //Loop through the active elemets
             foreach (Transform item in activeElements)
             {
-                //Move the item to the left
-                item.transform.position -= Vector3.right * startingSpeed * speedMultiplier * Time.deltaTime;
+                //Move the item down
+                item.transform.position += Vector3.down * startingSpeed * speedMultiplier * Time.deltaTime;
 
                 //If the item has reached the reset position
-                if (item.transform.position.x < resetAt)
+                if (item.transform.position.y > resetAtY)
                     removeLast = true;
             }
 
@@ -79,7 +87,8 @@ public class MovingLayer : MonoBehaviour
         item.gameObject.SetActive(false);
 
         //Reset it's position
-        item.transform.position = new Vector3(startAt, item.transform.position.y, 0);
+		print (startAtX + " and " + startAtY);
+        item.transform.position = new Vector3(startAtX, startAtY, 0);
     }
     //Loops trough the children of a layer element, and enables them
     private void EnableChild(Transform element)
@@ -153,7 +162,7 @@ public class MovingLayer : MonoBehaviour
         if (inMiddle)
         {
             //Place it
-            item.transform.position = new Vector3(0, item.transform.position.y, 0);
+            item.transform.position = new Vector3(startAtX, startAtY, 0);
         }
 
         //Activate it, and add it to the active elements
@@ -175,7 +184,7 @@ public class MovingLayer : MonoBehaviour
 
         foreach (Transform item in activeElements)
         {
-            item.transform.position = new Vector3(startAt, item.transform.position.y, 0);
+            item.transform.position = new Vector3(startAtX, startAtY, 0);
 
             if (childCheck)
                 EnableChild(item);

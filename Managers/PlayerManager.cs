@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 enum PlayerState { Enabled, Disabled };
-enum PlayerStatus { Idle, Moving, Sinking, Crashed };
+enum PlayerStatus { Moving, Sinking, Crashed };
 enum PlayerVulnerability { Enabled, Disabled, Shielded };
 enum PowerupUsage { Enabled, Disabled };
 
@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour
         newRotation = new Vector3();
         playerCoords = this.transform.position; // starting position
 
-        playerStatus = PlayerStatus.Idle;
+        playerStatus = PlayerStatus.Moving;
         playerState = PlayerState.Disabled;
         playerVulnerability = PlayerVulnerability.Disabled;
         powerupUsage = PowerupUsage.Disabled;
@@ -146,7 +146,7 @@ public class PlayerManager : MonoBehaviour
     //Enables the submarine
 	public void EnableSubmarine()
     {
-        playerStatus = PlayerStatus.Idle;
+        playerStatus = PlayerStatus.Moving;
         playerState = PlayerState.Enabled;
         playerVulnerability = PlayerVulnerability.Enabled;
         powerupUsage = PowerupUsage.Enabled;
@@ -181,7 +181,7 @@ public class PlayerManager : MonoBehaviour
     //Resets the submarine
 	public void Reset()
     {
-        playerStatus = PlayerStatus.Idle;
+        playerStatus = PlayerStatus.Moving;
         playerState = PlayerState.Disabled;
         playerVulnerability = PlayerVulnerability.Disabled;
         powerupUsage = PowerupUsage.Disabled;
@@ -207,7 +207,7 @@ public class PlayerManager : MonoBehaviour
         if (playerStatus == PlayerStatus.Sinking || playerStatus == PlayerStatus.Crashed)
             return;
 
-        if (playerStatus == PlayerStatus.Idle || playerStatus == PlayerStatus.Moving || inputActive) {
+        if (playerStatus == PlayerStatus.Moving || inputActive) {
 			playerStatus = PlayerStatus.Moving;
 		} else {
 			playerStatus = PlayerStatus.Sinking;
@@ -389,7 +389,7 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         //Reset states
-        playerStatus = PlayerStatus.Idle;
+        playerStatus = PlayerStatus.Moving;
         playerState = PlayerState.Enabled;
         playerVulnerability = PlayerVulnerability.Enabled;
 

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PowerupLayer : MovingLayer 
@@ -18,7 +18,7 @@ public class PowerupLayer : MovingLayer
         Transform item = inactive[Random.Range(0, inactive.Count)];
 
         //Place it
-        item.transform.position = new Vector3(startAt, Random.Range(maxDepth, minDepth), 0);
+        item.transform.position = new Vector3(startAtY, Random.Range(maxDepth, minDepth), 0);
 
         item.GetComponent<Renderer>().enabled = true;
         item.GetComponent<Collider2D>().enabled = true;

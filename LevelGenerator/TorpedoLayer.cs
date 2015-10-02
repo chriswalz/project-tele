@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -113,7 +113,7 @@ public class TorpedoLayer : MovingLayer
         Transform torpedo = inactive[0];
 
         //Place the torpedo on the proper y position
-        torpedo.position = new Vector3(startAt, yPos, 0);
+        torpedo.position = new Vector3(startAtY, yPos, 0);
 
         torpedo.GetComponent<Renderer>().enabled = true;
         torpedo.GetComponent<Collider2D>().enabled = true;

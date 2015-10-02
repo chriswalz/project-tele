@@ -22,7 +22,6 @@ public class InputManager : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 		float mX = pos.x;
 		float mY = pos.y;
 		playerManager.UpdateCoords (mX, mY);
-		print ("Coords updated");
 	}
 	public void OnEndDrag(PointerEventData eventData)
 	{
